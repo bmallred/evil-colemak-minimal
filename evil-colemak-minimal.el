@@ -41,63 +41,74 @@
   (lambda () (evil-colemak-minimal-mode t))
   "Global minor mode with evil-mode enhancements for the Colemak keyboard layout.")
 
-(evil-define-minor-mode-key
-  'motion 'evil-colemak-minimal-mode
-  ;; Left, Down, Up, Right
-  "s" 'evil-backward-char
-  "n" 'evil-next-line
-  "e" 'evil-previous-line
-  "t" 'evil-forward-char
+;; Helper functions to set maps
+(defun evil-colemak-minimal/set-for-all (key def &optional maps)
+  (unless maps
+    (setq maps (list 'normal
+                     'visual
+                     'insert
+                     'emacs
+                     'motion)))
+  (while maps
+    (evil-define-minor-mode-key (pop maps) 'evil-colemak-minimal-mode key def)))
 
-  ;; (H)op to next/previous search
-  "h" 'evil-search-next
-  "H" 'evil-search-previous
+(defun evil-colemak-minimal/set-for-all-but-insert (key def)
+  (evil-colemak-minimal/set-for-all key def (list 'normal
+                                        'visual
+                                        'emacs
+                                        'motion)))
 
-  ;; (L)ast character in word/WORD
-  "l" 'evil-forward-word-end
-  "L" 'evil-forward-WORD-end
-  
-  ;; (K)in of character
-  "k" 'evil-find-char-to
-  "K" 'evil-find-char-to-backward)
+(defun evil-colemak-minimal/set-for-all-but-insert-and-motion (key def)
+  (evil-colemak-minimal/set-for-all key def (list 'normal
+                                        'visual
+                                        'emacs)))
 
-(evil-define-minor-mode-key
-  'normal 'evil-colemak-minimal-mode
-  ;; Left, Down, Up, Right
-  "s" 'evil-backward-char
-  "n" 'evil-next-line
-  "e" 'evil-previous-line
-  "t" 'evil-forward-char)
+(defun evil-colemak-minimal/set-for-normal (key def)
+  (evil-colemak-minimal/set-for-all key def (list 'normal)))
 
-(evil-define-minor-mode-key
-  'visual 'evil-colemak-minimal-mode
-  ;; Left, Down, Up, Right
-  "s" 'evil-backward-char
-  "n" 'evil-next-line
-  "e" 'evil-previous-line
-  "t" 'evil-forward-char)
+;; Major keys that were replaced
+(defconst left "s")
+(defconst down "n")
+(defconst up "e")
+(defconst right "t")
+(defconst next "h")
+(defconst end "l")
+(defconst towards "k")
 
-(evil-define-minor-mode-key
-  'operator 'evil-colemak-minimal-mode
-  ;; Left, Down, Up, Right
-  "s" 'evil-backward-char
-  "n" 'evil-next-line
-  "e" 'evil-previous-line
-  "t" 'evil-forward-char)
+;; Left, Down, Up, Right
+(evil-colemak-minimal/set-for-all-but-insert left 'evil-backward-char)
+(evil-colemak-minimal/set-for-all-but-insert down 'evil-next-line)
+(evil-colemak-minimal/set-for-all-but-insert up 'evil-previous-line)
+(evil-colemak-minimal/set-for-all-but-insert right 'evil-forward-char)
 
-(evil-define-minor-mode-key
-  'window 'evil-colemak-minimal-mode
-  ;; Left, Down, Up, Right
-  "s" 'evil-window-left
-  "n" 'evil-window-down
-  "e" 'evil-window-up
-  "t" 'evil-window-right
+;; Window handling
+;; C-w (not C-r as in Shai's mappings) prefixes window commands
+(define-key evil-window-map left 'evil-window-left)
+(define-key evil-window-map (upcase left) 'evil-window-move-far-left)
+(define-key evil-window-map down 'evil-window-down)
+(define-key evil-window-map (upcase down) 'evil-window-move-very-bottom)
+(define-key evil-window-map up 'evil-window-up)
+(define-key evil-window-map (upcase up) 'evil-window-move-very-top)
+(define-key evil-window-map right 'evil-window-right)
+(define-key evil-window-map (upcase right) 'evil-window-move-far-right)
 
-  ;; Move windows
-  "S" 'evil-window-move-far-left
-  "N" 'evil-window-move-very-bottom
-  "E" 'evil-window-move-very-top
-  "T" 'evil-window-move-far-right)
+;; (H)op to next/previous search
+(evil-colemak-minimal/set-for-all-but-insert next 'evil-search-next)
+(evil-colemak-minimal/set-for-all-but-insert (upcase next) 'evil-search-previous)
+
+;; (L)ast character in word/WORD
+(evil-colemak-minimal/set-for-all-but-insert end 'evil-forward-word-end)
+(evil-colemak-minimal/set-for-all-but-insert (upcase end) 'evil-forward-WORD-end)
+
+;; (K)in of character
+(evil-colemak-minimal/set-for-all-but-insert towards 'evil-find-char-to)
+(evil-colemak-minimal/set-for-all-but-insert (upcase towards) 'evil-find-char-to-backward)
+
+;; Code folding
+(evil-colemak-minimal/set-for-normal (kbd "zM") 'hs-hide-all)
+(evil-colemak-minimal/set-for-normal (kbd "zm") 'hs-hide-level)
+(evil-colemak-minimal/set-for-normal (kbd "zR") 'hs-show-all)
+(evil-colemak-minimal/set-for-normal (kbd "zr") 'hs-show-block)
 
 (provide 'evil-colemak-minimal)
 
