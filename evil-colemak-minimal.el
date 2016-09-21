@@ -41,6 +41,17 @@
   (lambda () (evil-colemak-minimal-mode t))
   "Global minor mode with evil-mode enhancements for the Colemak keyboard layout.")
 
+(defun evil-colemak-minimal-mode-toggle ()
+  "Toggle the Colemak minimal key mappings"
+  (interactive)
+  (if (get 'evil-colemak-minimal-mode-toggle 'state)
+      (progn
+        (evil-colemak-minimal-mode -1)
+        (put 'evil-colemak-minimal-mode-toggle 'state nil))
+    (progn
+      (evil-colemak-minimal-mode t)
+      (put 'evil-colemak-minimal-mode-toggle 'state t))))
+
 ;; Helper functions to set maps
 (defun evil-colemak-minimal/set-for-all (key def &optional maps)
   (unless maps
@@ -54,14 +65,14 @@
 
 (defun evil-colemak-minimal/set-for-all-but-insert (key def)
   (evil-colemak-minimal/set-for-all key def (list 'normal
-                                        'visual
-                                        'emacs
-                                        'motion)))
+                                                  'visual
+                                                  'emacs
+                                                  'motion)))
 
 (defun evil-colemak-minimal/set-for-all-but-insert-and-motion (key def)
   (evil-colemak-minimal/set-for-all key def (list 'normal
-                                        'visual
-                                        'emacs)))
+                                                  'visual
+                                                  'emacs)))
 
 (defun evil-colemak-minimal/set-for-normal (key def)
   (evil-colemak-minimal/set-for-all key def (list 'normal)))
@@ -109,6 +120,7 @@
 (evil-colemak-minimal/set-for-normal (kbd "zm") 'hs-hide-level)
 (evil-colemak-minimal/set-for-normal (kbd "zR") 'hs-show-all)
 (evil-colemak-minimal/set-for-normal (kbd "zr") 'hs-show-block)
+
 
 (provide 'evil-colemak-minimal)
 
