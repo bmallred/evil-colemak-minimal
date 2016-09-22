@@ -41,17 +41,6 @@
   (lambda () (evil-colemak-minimal-mode t))
   "Global minor mode with evil-mode enhancements for the Colemak keyboard layout.")
 
-(defun evil-colemak-minimal-mode-toggle ()
-  "Toggle the Colemak minimal key mappings"
-  (interactive)
-  (if (get 'evil-colemak-minimal-mode-toggle 'state)
-      (progn
-        (evil-colemak-minimal-mode -1)
-        (put 'evil-colemak-minimal-mode-toggle 'state nil))
-    (progn
-      (evil-colemak-minimal-mode t)
-      (put 'evil-colemak-minimal-mode-toggle 'state t))))
-
 ;; Helper functions to set maps
 (defun evil-colemak-minimal-set-for-all (key def &optional maps)
   (unless maps
