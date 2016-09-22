@@ -77,43 +77,50 @@
 (defun evil-colemak-minimal-set-for-normal (key def)
   (evil-colemak-minimal-set-for-all key def (list 'normal)))
 
-;; Major keys that were replaced
-(defconst left "s")
-(defconst down "n")
-(defconst up "e")
-(defconst right "t")
-(defconst next "h")
-(defconst end "l")
-(defconst towards "k")
+;; Major keys which were replaced
+(defconst evil-colemak-minimal-left "s"
+  "Movement left normally mapped to 'h'")
+(defconst evil-colemak-minimal-down "n"
+  "Movement down normally mapped to 'j'")
+(defconst evil-colemak-minimal-up "e"
+  "Movement up normally mapped to 'k'")
+(defconst evil-colemak-minimal-right "t"
+  "Movement right normally mapped to 'l'")
+(defconst evil-colemak-minimal-next "h"
+  "Movement to the next/previous search result normally mapped to 'n'")
+(defconst evil-colemak-minimal-end "l"
+  "Movement to the end of a word normally mapped to 'e'")
+(defconst evil-colemak-minimal-towards "k"
+  "Movement towards a character normally mapped to 't'")
 
 ;; Left, Down, Up, Right
-(evil-colemak-minimal-set-for-all-but-insert left 'evil-backward-char)
-(evil-colemak-minimal-set-for-all-but-insert down 'evil-next-line)
-(evil-colemak-minimal-set-for-all-but-insert up 'evil-previous-line)
-(evil-colemak-minimal-set-for-all-but-insert right 'evil-forward-char)
+(evil-colemak-minimal-set-for-all-but-insert evil-colemak-minimal-left 'evil-backward-char)
+(evil-colemak-minimal-set-for-all-but-insert evil-colemak-minimal-down 'evil-next-line)
+(evil-colemak-minimal-set-for-all-but-insert evil-colemak-minimal-up 'evil-previous-line)
+(evil-colemak-minimal-set-for-all-but-insert evil-colemak-minimal-right 'evil-forward-char)
 
 ;; Window handling
 ;; C-w (not C-r as in Shai's mappings) prefixes window commands
-(define-key evil-window-map left 'evil-window-left)
-(define-key evil-window-map (upcase left) 'evil-window-move-far-left)
-(define-key evil-window-map down 'evil-window-down)
-(define-key evil-window-map (upcase down) 'evil-window-move-very-bottom)
-(define-key evil-window-map up 'evil-window-up)
-(define-key evil-window-map (upcase up) 'evil-window-move-very-top)
-(define-key evil-window-map right 'evil-window-right)
-(define-key evil-window-map (upcase right) 'evil-window-move-far-right)
+(define-key evil-window-map evil-colemak-minimal-left 'evil-window-left)
+(define-key evil-window-map (upcase evil-colemak-minimal-left) 'evil-window-move-far-left)
+(define-key evil-window-map evil-colemak-minimal-down 'evil-window-down)
+(define-key evil-window-map (upcase evil-colemak-minimal-down) 'evil-window-move-very-bottom)
+(define-key evil-window-map evil-colemak-minimal-up 'evil-window-up)
+(define-key evil-window-map (upcase evil-colemak-minimal-up) 'evil-window-move-very-top)
+(define-key evil-window-map evil-colemak-minimal-right 'evil-window-right)
+(define-key evil-window-map (upcase evil-colemak-minimal-right) 'evil-window-move-far-right)
 
 ;; (H)op to next/previous search
-(evil-colemak-minimal-set-for-all-but-insert next 'evil-search-next)
-(evil-colemak-minimal-set-for-all-but-insert (upcase next) 'evil-search-previous)
+(evil-colemak-minimal-set-for-all-but-insert evil-colemak-minimal-next 'evil-search-next)
+(evil-colemak-minimal-set-for-all-but-insert (upcase evil-colemak-minimal-next) 'evil-search-previous)
 
 ;; (L)ast character in word/WORD
-(evil-colemak-minimal-set-for-all-but-insert end 'evil-forward-word-end)
-(evil-colemak-minimal-set-for-all-but-insert (upcase end) 'evil-forward-WORD-end)
+(evil-colemak-minimal-set-for-all-but-insert evil-colemak-minimal-end 'evil-forward-word-end)
+(evil-colemak-minimal-set-for-all-but-insert (upcase evil-colemak-minimal-end) 'evil-forward-WORD-end)
 
 ;; (K)in of character
-(evil-colemak-minimal-set-for-all-but-insert towards 'evil-find-char-to)
-(evil-colemak-minimal-set-for-all-but-insert (upcase towards) 'evil-find-char-to-backward)
+(evil-colemak-minimal-set-for-all-but-insert evil-colemak-minimal-towards 'evil-find-char-to)
+(evil-colemak-minimal-set-for-all-but-insert (upcase evil-colemak-minimal-towards) 'evil-find-char-to-backward)
 
 ;; Code folding
 (evil-colemak-minimal-set-for-normal (kbd "zM") 'hs-hide-all)
