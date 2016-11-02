@@ -1,7 +1,27 @@
 Evil Colemak (minimal)
 ======================
 
-Colemak configuration for ```evil-mode``` with minimal adjustments.
+Colemak configuration for ```evil-mode``` with minimal adjustments and a split
+navigation setup.
+
+Why?
+----
+
+When switching to the [Colemak](https://colemak.com/) keyboard layout I tried
+several different Vim alternative bindings.
+
+Remapping the default HJKL navigation keys worked but I found I fumbled more
+often than was acceptable to me because my brain was trained to use the
+mnemonics more than positioning.
+
+However, not using any remapping for navigation was not comfortable either.
+Leaving the home row so often defeated a lot of the benefits of the Vim
+defaults.
+
+So after analyzing the Vim defaults and comparing them to what I actually use
+or didn't use I came up with a hybrid. To minimize the amount of remapping
+to retain as much of the original mnemonics as possible while still keeping
+navigation right under my findertips.
 
 Install
 -------
@@ -51,6 +71,70 @@ your mode line. If you don't like it, use ```rich-minority``` or
 Note that this package assumes that your operating system is properly
 configured for the Colemak keyboard layout. It does not implement the
 Colemak layout on top of a Qwerty layout.
+
+Layout
+------
+
+The basic bindings are as follows
+
+| Key | QWERTY | Command  | New Mnemonics |
+| --- | ------ | -------- | ------------- |
+| n   | j      | down     |               |
+| e   | k      | up       |               |
+| s   | h      | left     |               |
+| t   | l      | right    |               |
+| l   | e      | end      | (L)ast        |
+| k   | t      | towards  | (K)in         |
+| h   | n      | next     | (H)op         |
+| H   | N      | previous |               |
+
+Additional convenience bindings
+
+| Key   | QWERTY | Command             |
+| ----- | ------ | ------------------- |
+| C-w n | C-w j  | move down a window  |
+| C-w N | C-w J  | move window down    |
+| C-w e | C-w k  | move up a window    |
+| C-w E | C-w k  | move move window up |
+| C-w s | C-w h  | move left a window  |
+| C-w S | C-w h  | move window left    |
+| C-w t | C-w l  | move right a window |
+| C-w T | C-w l  | move window right   |
+| zM    | e      | Fold all code       |
+| zm    | t      | Fold current level  |
+| zR    | n      | Show all folds      |
+| zr    | N      | Show current block  |
+
+Advanced
+--------
+
+If it is necessary to use some of the bindings in this package the keys have
+been exposed.
+
+``` emacs-lisp
+;; Major keys which were replaced
+(defconst evil-colemak-minimal-left "s"
+  "Movement left normally mapped to 'h'")
+(defconst evil-colemak-minimal-down "n"
+  "Movement down normally mapped to 'j'")
+(defconst evil-colemak-minimal-up "e"
+  "Movement up normally mapped to 'k'")
+(defconst evil-colemak-minimal-right "t"
+  "Movement right normally mapped to 'l'")
+(defconst evil-colemak-minimal-next "h"
+  "Movement to the next/previous search result normally mapped to 'n'")
+(defconst evil-colemak-minimal-end "l"
+  "Movement to the end of a word normally mapped to 'e'")
+(defconst evil-colemak-minimal-towards "k"
+  "Movement towards a character normally mapped to 't'")
+```
+
+Also, for pairing it is easy to toggle the key layout for partners who still
+use Qwerty:
+
+``` emacs-lisp
+(evil-leader/set-key "kt" 'evil-colemak-minimal-mode)
+```
 
 Credits
 -------
