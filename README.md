@@ -95,7 +95,7 @@ Additional convenience bindings
 | C-w n | C-w j  | move down a window  |
 | C-w N | C-w J  | move window down    |
 | C-w e | C-w k  | move up a window    |
-| C-w E | C-w k  | move move window up |
+| C-w E | C-w k  | move window up      |
 | C-w s | C-w h  | move left a window  |
 | C-w S | C-w h  | move window left    |
 | C-w t | C-w l  | move right a window |
@@ -139,6 +139,6 @@ use Qwerty:
 Credits
 -------
 
-This Emacs package was templated on Wouter Bolsterlee's package
-```evil-colemak-basics```, available from [https://github.com/wbolster/evil-colemak-basics](https://github.com/wbolster/evil-colemak-basics).
+This Emacs package was templated on [Wouter Bolsterlee](https://github.com/wbolster)'s package
+```evil-colemak-basics```, available from [wbolster/evil-colemak-basics](https://github.com/wbolster/evil-colemak-basics).
 
