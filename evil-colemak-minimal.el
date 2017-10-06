@@ -47,7 +47,6 @@
     (setq maps (list 'normal
                      'visual
                      'insert
-                     'emacs
                      'motion)))
   (while maps
     (evil-define-minor-mode-key (pop maps) 'evil-colemak-minimal-mode key def)))
@@ -55,13 +54,11 @@
 (defun evil-colemak-minimal-set-for-all-but-insert (key def)
   (evil-colemak-minimal-set-for-all key def (list 'normal
                                                   'visual
-                                                  'emacs
                                                   'motion)))
 
 (defun evil-colemak-minimal-set-for-all-but-insert-and-motion (key def)
   (evil-colemak-minimal-set-for-all key def (list 'normal
-                                                  'visual
-                                                  'emacs)))
+                                                  'visual)))
 
 (defun evil-colemak-minimal-set-for-normal (key def)
   (evil-colemak-minimal-set-for-all key def (list 'normal)))
