@@ -108,12 +108,6 @@
 (evil-colemak-minimal-set-for-all-but-insert evil-colemak-minimal-towards 'evil-find-char-to)
 (evil-colemak-minimal-set-for-all-but-insert (upcase evil-colemak-minimal-towards) 'evil-find-char-to-backward)
 
-;; Code folding
-(evil-colemak-minimal-set-for-normal (kbd "zM") 'hs-hide-all)
-(evil-colemak-minimal-set-for-normal (kbd "zm") 'hs-hide-level)
-(evil-colemak-minimal-set-for-normal (kbd "zR") 'hs-show-all)
-(evil-colemak-minimal-set-for-normal (kbd "zr") 'hs-show-block)
-
 (provide 'evil-colemak-minimal)
 
 ;;; evil-colemak-minimal.el ends here

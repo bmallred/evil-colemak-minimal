@@ -1,7 +1,7 @@
 Evil Colemak (minimal)
 ======================
 
-Colemak configuration for ```evil-mode``` with minimal adjustments and a split
+Colemak configuration for `evil-mode` with minimal adjustments and a split
 navigation setup.
 
 Why?
@@ -27,7 +27,7 @@ Install
 -------
 
 This package is available from Melpa and can be installed with the
-package manager (``package.el```) that comes bundled with Emacs 24+.
+package manager (`package.el`) that comes bundled with Emacs 24+.
 
 ``` emacs-lisp
 M-x package-install RET evil-colemak-minimal RET
@@ -40,7 +40,7 @@ load it explicitly:
 (require 'evil-colemak-minimal)
 ```
 
-Note that thir ```(require)``` is not needed when installing from
+Note that thir `(require)` is not needed when installing from
 Melpa.
 
 Usage
@@ -58,15 +58,15 @@ To enable for just a single buffer, use:
 M-x evil-colemak-minimal-mode RET
 ```
 
-To enable permanently, put this in your ```init.el```:
+To enable permanently, put this in your `init.el`:
 
 ``` emacs-lisp
 (global-evil-colemak-minimal-mode)
 ```
 
-When enabled, a lighter showing ```colemak``` will appear in
-your mode line. If you don't like it, use ```rich-minority``` or 
-```diminish``` to hide it.
+When enabled, a lighter showing `colemak` will appear in
+your mode line. If you don't like it, use `rich-minority` or 
+`diminish` to hide it.
 
 Note that this package assumes that your operating system is properly
 configured for the Colemak keyboard layout. It does not implement the
@@ -105,6 +105,44 @@ Additional convenience bindings
 | zR    | n      | Show all folds      |
 | zr    | N      | Show current block  |
 
+Code folding
+------------
+
+Code folding can be accomplished using `HideShow`. For example, you can turn on the `hs-minor-mode` like such:
+
+``` emacs-lisp
+(add-to-list 'hs-special-modes-alist
+             '(nxml-mode
+               "<!--\\|<[^/>]*[^/]>"
+               "-->\\|</[^/>]*[^/]>"
+
+               "<!--"
+               sgml-skip-tag-forward
+               nil))
+(add-hook 'prog-mode-hook #'hs-minor-mode)
+(add-hook 'nxml-mode-hook #'hs-minor-mode)
+```
+
+and then mapping the keys as you see fit:
+
+``` emacs-lisp
+;; Code folding
+(evil-colemak-minimal-set-for-normal (kbd "zM") 'hs-hide-all)
+(evil-colemak-minimal-set-for-normal (kbd "zm") 'hs-hide-level)
+(evil-colemak-minimal-set-for-normal (kbd "zR") 'hs-show-all)
+(evil-colemak-minimal-set-for-normal (kbd "zr") 'hs-show-block)
+```
+
+This would append the following mappings:
+
+| Key   | QWERTY | Command             |
+| ----- | ------ | ------------------- |
+| zM    | e      | Fold all code       |
+| zm    | t      | Fold current level  |
+| zR    | n      | Show all folds      |
+| zr    | N      | Show current block  |
+
+
 Advanced
 --------
 
@@ -140,5 +178,5 @@ Credits
 -------
 
 This Emacs package was templated on [Wouter Bolsterlee](https://github.com/wbolster)'s package
-```evil-colemak-basics```, available from [wbolster/evil-colemak-basics](https://github.com/wbolster/evil-colemak-basics).
+`evil-colemak-basics`, available from [wbolster/evil-colemak-basics](https://github.com/wbolster/evil-colemak-basics).
 
