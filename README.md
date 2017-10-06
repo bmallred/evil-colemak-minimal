@@ -1,3 +1,5 @@
+[![MELPA](https://melpa.org/packages/evil-colemak-minimal-badge.svg)](https://melpa.org/#/evil-colemak-minimal)
+
 Evil Colemak (minimal)
 ======================
 
