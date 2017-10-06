@@ -1,7 +1,7 @@
 ;;; evil-colemak-minimal.el --- Minimal Colemak key bindings for evil-mode
 
 ;; Author: Bryan Allred <bryan@revolvingcow.com>
-;; Version: 1.0.0
+;; Version: 1.1.0
 ;; Package-Requires: ((emacs "24") (evil "1.2.12"))
 ;; Keywords: colemak evil
 ;; URL: https://github.com/bmallred/evil-colemak-minimal
